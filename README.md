@@ -34,7 +34,7 @@ Includes a built-in **FastAPI** web interface to visualize server data:
 * **OpenAI Integration:** Chat with the bot using `/ai` or `!core` for intelligent, cyber-themed responses.
 
 ---
-
+```
 ## 🛠️ Installation
 
 ### 1. Prerequisites
@@ -46,3 +46,57 @@ Includes a built-in **FastAPI** web interface to visualize server data:
 ```bash
 git clone https://github.com/devnand-47/Discord-bot
 cd UltimateBot
+```
+```
+3. Install DependenciesCreate a virtual environment (recommended) and install the required packages:Bash# Linux/Mac
+python3 -m venv venv
+source venv/bin/activate
+
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Install requirements
+pip install -r requirements.txt
+Note: Create a requirements.txt with the following content if it doesn't exist:Plaintextdiscord.py
+aiosqlite
+fastapi
+uvicorn
+python-multipart
+openai
+itsdangerous
+
+4. ConfigurationOpen config.py and configure your settings.⚠️ IMPORTANT: Never commit your actual Token or API keys to GitHub. Use environment variables or a .env file in production.Python# config.py
+
+TOKEN = "YOUR_DISCORD_BOT_TOKEN"
+GUILD_ID = 123456789012345678  # Your Main Server ID
+
+```# Dashboard Credentials (CHANGE THESE!)
+DASHBOARD_USERNAME = "admin"
+DASHBOARD_PASSWORD = "CHANGE_ME"
+DASHBOARD_SECRET_KEY = "complex-random-string"
+```
+
+# IDs for roles and channels
+LOG_CHANNEL_ID = 123...
+VERIFICATION_CHANNEL_ID = 123...
+🚀 UsageRunning the BotTo start the Discord bot (and the database):Bashpython bot.py
+Running the DashboardTo start the web dashboard (runs separately or in parallel):Bashuvicorn dashboard:app --reload --port 8000
+Access the dashboard at: localhost 📖 Command ReferenceAdmin (Slash Commands)CommandDescription/firewall <mode>Turn Anti-Raid Firewall on, off, or view status./announce <msg>Send a styled embed announcement./schedule_announceSchedule a message to be sent later./backup_nowForce a text backup of guild channels./lockdown <bool>Lock or unlock a channel./logs <limit>View recent moderation logs.ModerationCommandDescription/kick <user>Kick a member./ban <user>Ban a member./mute <user> <time>Timeout a member./clear <amount>Bulk delete messages.GeneralCommandDescription/ai <message>Ask the AI assistant a question./ticketOpen a support ticket.!pingCheck bot latency.
+
+📂 Project StructureUltimateBot/
+```
+├── bot.py               # Main bot entry point
+├── config.py            # Configuration variables
+├── dashboard.py         # FastAPI web dashboard
+├── requirements.txt     # Python dependencies
+├── data/                # Database and Backups (Auto-generated)
+└── cogs/
+    ├── admin.py         # Admin commands
+    ├── automod.py       # Firewall and Anti-Spam
+    ├── moderation.py    # Kick/Ban/Mute
+    ├── ai.py            # OpenAI Integration
+    ├── backups.py       # Channel backup logic
+    ├── help.py          # Custom help menu
+    └── ...
+```
